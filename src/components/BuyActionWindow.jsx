@@ -20,7 +20,7 @@ const BuyActionWindow = ({ uid }) => {
     });
 
     console.log(reponse)
-    GeneralContext.closeBuyWindow();
+    // GeneralContext.closeBuyWindow();
   };
 
   const handleCancelClick = () => {
