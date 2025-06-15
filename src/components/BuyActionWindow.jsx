@@ -11,15 +11,26 @@ const BuyActionWindow = ({ uid }) => {
   const [stockQuantity, setStockQuantity] = useState(1);
   const [stockPrice, setStockPrice] = useState(0.0);
 
-  const handleBuyClick = () => {
-   const reponse= axios.post("https://zerodha1backend.onrender.com/newOrder", {
+  const handleBuyClick = async() => {
+  try {
+    const response = await axios.post("https://zerodha1backend.onrender.com/newOrder", {
       name: uid,
       qty: stockQuantity,
       price: stockPrice,
       mode: "BUY",
     });
 
-    console.log(reponse)
+    console.log(response);
+
+    if (response.status === 201) {
+      alert("Order placed successfully!");
+      // Optional: Close the buy window
+      // GeneralContext.closeBuyWindow();
+    }
+  } catch (error) {
+    console.error("Order failed:", error);
+    alert("Failed to place order. Please try again.");
+  }
     // GeneralContext.closeBuyWindow();
   };
 
